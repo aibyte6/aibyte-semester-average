@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Semester Average – Computer Engineering</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body{
+    font-family:'Orbitron', sans-serif;
+    background:linear-gradient(135deg,#0f172a,#020617);
+    margin:0;
+    color:#e5e7eb;
+}
+
+header{
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+    padding:30px;
+    text-align:center;
+    border-radius:0 0 20px 20px;
+}
+
+.container{
+    max-width:950px;
+    margin:30px auto;
+    background:#020617;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(37,99,235,0.25);
+}
+
+.matiere{
+    border-left:5px solid #38bdf8;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.matiere h3{
+    flex:1;
+    color:#60a5fa;
+    font-size:0.95em;
+}
+
+.inputs{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+input{
+    width:100px;
+    padding:9px;
+    border-radius:10px;
+    border:1px solid #1e293b;
+    background:#020617;
+    color:#e5e7eb;
+    text-align:center;
+}
+
+button{
+    width:100%;
+    padding:18px;
+    margin-top:25px;
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+    border:none;
+    border-radius:18px;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:25px;
+    padding:20px;
+    border-radius:18px;
+}
+
+.pass{background:#052e16;color:#4ade80;}
+.fail{background:#450a0a;color:#f87171;}
+
+.subject-result{
+    margin-top:10px;
+    padding:10px;
+    border-radius:12px;
+    background:#020617;
+    border:1px solid #1e293b;
+}
+
+.footer{
+    margin-top:30px;
+    text-align:center;
+    font-size:0.75em;
+    color:#94a3b8;
+}
+.footer a{color:#38bdf8;text-decoration:none;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>💻 Semester Average Calculator</h1>
+<p>Computer Engineering • AIBYTE</p>
+</header>
+
+<div class="container">
+
+<!-- SUBJECTS -->
+<div class="matiere">
+<h3>🧮 Algorithmique (Coef 4)</h3>
+<div class="inputs">
+<input id="algo_exam" placeholder="Exam">
+<input id="algo_td" placeholder="TD">
+<input id="algo_tp" placeholder="TP">
+</div>
+</div>
+
+<div class="matiere">
+<h3>☕ POO (Coef 4)</h3>
+<div class="inputs">
+<input id="poo_exam" placeholder="Exam">
+<input id="poo_td" placeholder="TD">
+</div>
+</div>
+
+<div class="matiere">
+<h3>🖥️ IS (Coef 3)</h3>
+<div class="inputs">
+<input id="is_exam" placeholder="Exam">
+<input id="is_td" placeholder="TD">
+</div>
+</div>
+
+<div class="matiere">
+<h3>📐 Analyse (Coef 3)</h3>
+<div class="inputs">
+<input id="ana_exam" placeholder="Exam">
+<input id="ana_td" placeholder="TD">
+</div>
+</div>
+
+<div class="matiere">
+<h3>📊 Algèbre (Coef 3)</h3>
+<div class="inputs">
+<input id="alg_exam" placeholder="Exam">
+<input id="alg_td" placeholder="TD">
+</div>
+</div>
+
+<div class="matiere">
+<h3>🎲 Probability (Coef 2)</h3>
+<div class="inputs">
+<input id="pro_exam" placeholder="Exam">
+<input id="pro_td" placeholder="TD">
+</div>
+</div>
+
+<div class="matiere">
+<h3>🏢 Enterprise (Coef 1)</h3>
+<div class="inputs">
+<input id="ent_exam" placeholder="Exam">
+</div>
+</div>
+
+<button onclick="calculer()">🔥 Calculate Results</button>
+
+<div id="details" class="result"></div>
+
+<div class="footer">
+Created by <strong>Ali (AIBYTE)</strong><br>
+<a href="https://www.instagram.com/aiby.te" target="_blank">
+<i class="fab fa-instagram"></i> instagram.com/aiby.te
+</a>
+</div>
+
+</div>
+
+<script>
+function v(id){
+    let n = parseFloat(document.getElementById(id).value);
+    return isNaN(n) ? 0 : n;
+}
+
+function examTD(e,t){ return e*0.6 + t*0.4; }
+function examTDTP(e,t,tp){ return e*0.6 + ((t+tp)/2)*0.4; }
+
+function line(name, note){
+    if(note >= 10){
+        return `<div class="subject-result">✅ <b>${name}</b>: ${note.toFixed(2)}/20 – Well done! Keep it up 🚀</div>`;
+    }else{
+        return `<div class="subject-result">❌ <b>${name}</b>: ${note.toFixed(2)}/20 – Needs more work, don’t give up 💪</div>`;
+    }
+}
+
+function calculer(){
+    let html = "";
+    let total = 0;
+
+    let algo = examTDTP(v("algo_exam"),v("algo_td"),v("algo_tp"));
+    html += line("Algorithmique",algo); total += algo*4;
+
+    let poo = examTD(v("poo_exam"),v("poo_td"));
+    html += line("POO",poo); total += poo*4;
+
+    let isv = examTD(v("is_exam"),v("is_td"));
+    html += line("IS",isv); total += isv*3;
+
+    let ana = examTD(v("ana_exam"),v("ana_td"));
+    html += line("Analyse",ana); total += ana*3;
+
+    let alg = examTD(v("alg_exam"),v("alg_td"));
+    html += line("Algèbre",alg); total += alg*3;
+
+    let pro = examTD(v("pro_exam"),v("pro_td"));
+    html += line("Probability",pro); total += pro*2;
+
+    let ent = v("ent_exam");
+    html += line("Enterprise",ent); total += ent*1;
+
+    let avg = (total/20).toFixed(2);
+
+    html += `<hr><h3 style="text-align:center">📊 Global Average: ${avg}/20</h3>`;
+    html += avg>=10 
+        ? `<p style="text-align:center;color:#4ade80">🎉 Congratulations! Semester validated!</p>`
+        : `<p style="text-align:center;color:#f87171">⚠️ Semester not validated, but progress is coming.</p>`;
+
+    document.getElementById("details").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
