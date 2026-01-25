@@ -8,10 +8,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 
 body{
-    font-family:'Orbitron', sans-serif;
+    font-family:'Poppins', sans-serif;
     background:linear-gradient(135deg,#0f172a,#020617);
     margin:0;
     color:#e5e7eb;
@@ -185,6 +186,7 @@ Created by <strong>Ali (AIBYTE)</strong><br>
 </div>
 
 <script>
+
 function v(id){
     let n = parseFloat(document.getElementById(id).value);
     return isNaN(n) ? 0 : n;
@@ -205,37 +207,52 @@ function calculer(){
     let html = "";
     let total = 0;
 
+    // حساب المواد
     let algo = examTDTP(v("algo_exam"),v("algo_td"),v("algo_tp"));
-    html += line("Algorithmique",algo); total += algo*4;
+    total += algo * 4;
 
     let poo = examTD(v("poo_exam"),v("poo_td"));
-    html += line("POO",poo); total += poo*4;
+    total += poo * 4;
 
     let isv = examTD(v("is_exam"),v("is_td"));
-    html += line("IS",isv); total += isv*3;
+    total += isv * 3;
 
     let ana = examTD(v("ana_exam"),v("ana_td"));
-    html += line("Analyse",ana); total += ana*3;
+    total += ana * 3;
 
     let alg = examTD(v("alg_exam"),v("alg_td"));
-    html += line("Algèbre",alg); total += alg*3;
+    total += alg * 3;
 
     let pro = examTD(v("pro_exam"),v("pro_td"));
-    html += line("Probability",pro); total += pro*2;
+    total += pro * 2;
 
     let ent = v("ent_exam");
-    html += line("Enterprise",ent); total += ent*1;
+    total += ent * 1;
 
-    let avg = (total/20).toFixed(2);
+    // 🔥 حساب معدل الموسم
+    let avg = (total / 20).toFixed(2);
 
-    html += `<hr><h3 style="text-align:center">📊 Global Average: ${avg}/20</h3>`;
-    html += avg>=10 
+    // ✅ إظهار نتيجة الموسم أولًا
+    html += `<h3 style="text-align:center">📊 Semester Average: ${avg}/20</h3>`;
+    html += avg >= 10
         ? `<p style="text-align:center;color:#4ade80">🎉 Congratulations! Semester validated!</p>`
         : `<p style="text-align:center;color:#f87171">⚠️ Semester not validated, but progress is coming.</p>`;
+
+    html += `<hr>`;
+
+    // ثم نتائج المواد
+    html += line("Algorithmique", algo);
+    html += line("POO", poo);
+    html += line("IS", isv);
+    html += line("Analyse", ana);
+    html += line("Algèbre", alg);
+    html += line("Probability", pro);
+    html += line("Enterprise", ent);
 
     document.getElementById("details").innerHTML = html;
 }
 </script>
+
 
 </body>
 </html>
