@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Semester 4 Calculator</title>
+<title>Semester Calculator</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -24,6 +24,13 @@ header{
     padding:30px;
     background:linear-gradient(90deg,#2563eb,#38bdf8);
     border-radius:0 0 20px 20px;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:3px;
+    margin-top:10px;
 }
 
 .container{
@@ -92,6 +99,13 @@ button{
     font-size:13px;
 }
 
+.footer a{
+    color:#38bdf8;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -99,10 +113,17 @@ button{
 
 <header>
     <h1>💻 Semester 4 Calculator</h1>
-    <p>AIBYTE</p>
+    <div class="logo">AIBYTE</div>
 </header>
 
 <div class="container">
+
+    <div class="matiere">
+        <h3>📚 Semester 1 Average</h3>
+        <div class="inputs">
+            <input id="semester1" placeholder="S1 /20">
+        </div>
+    </div>
 
     <div class="matiere">
         <h3>🌐 Réseaux informatiques (Coef 3)</h3>
@@ -168,6 +189,11 @@ button{
 
     <div class="footer">
         Created by Ali (AIBYTE) 🚀
+        <br><br>
+
+        <a href="https://www.instagram.com/aiby.te/" target="_blank">
+            <i class="fab fa-instagram"></i> @aiby.te
+        </a>
     </div>
 
 </div>
@@ -249,18 +275,26 @@ function calculer(){
     total += graph * 2;
 
     let deo = v("deo_exam");
-    total += deo * 1;
+    total += deo;
 
-    let avg = (total / 20).toFixed(2);
+    let semester2 = total / 20;
+
+    let semester1 = v("semester1");
+
+    let annualAverage = ((semester1 * 20) + (semester2 * 20)) / 40;
 
     html += `
     <h2 style="text-align:center;">
-        📊 Semester Average: ${avg}/20
+        📊 Semester 2 Average: ${semester2.toFixed(2)}/20
+    </h2>
+
+    <h2 style="text-align:center;color:#38bdf8;">
+        🏆 Annual Average: ${annualAverage.toFixed(2)}/20
     </h2>`;
 
-    html += avg >= 10
-        ? `<p style="text-align:center;color:#4ade80;">🎉 Semester Validated!</p>`
-        : `<p style="text-align:center;color:#f87171;">⚠️ Semester Not Validated</p>`;
+    html += annualAverage >= 10
+        ? `<p style="text-align:center;color:#4ade80;">🎉 Year Validated!</p>`
+        : `<p style="text-align:center;color:#f87171;">⚠️ Year Not Validated</p>`;
 
     html += "<hr>";
 
