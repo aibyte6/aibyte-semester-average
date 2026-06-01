@@ -1,315 +1,541 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Semester Calculator</title>
+    <title>Semester Calculator</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: white;
+        }
 
-body{
-    margin:0;
-    font-family:'Poppins', sans-serif;
-    background:linear-gradient(135deg,#0f172a,#020617);
-    color:white;
-}
+        header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(90deg, #2563eb, #38bdf8);
+            border-radius: 0 0 20px 20px;
+        }
 
-header{
-    text-align:center;
-    padding:30px;
-    background:linear-gradient(90deg,#2563eb,#38bdf8);
-    border-radius:0 0 20px 20px;
-}
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-top: 10px;
+        }
 
-.logo{
-    font-size:26px;
-    font-weight:700;
-    letter-spacing:3px;
-    margin-top:10px;
-}
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #020617;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+        }
 
-.container{
-    max-width:900px;
-    margin:30px auto;
-    background:#020617;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 15px 40px rgba(37,99,235,0.2);
-}
+        .matiere {
+            border-left: 4px solid #38bdf8;
+            background: #0f172a;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
 
-.matiere{
-    border-left:4px solid #38bdf8;
-    background:#0f172a;
-    border-radius:14px;
-    padding:15px;
-    margin-bottom:15px;
-}
+        .matiere h3 {
+            margin-top: 0;
+            color: #60a5fa;
+            font-size: 16px;
+        }
 
-.matiere h3{
-    margin-top:0;
-    color:#60a5fa;
-    font-size:16px;
-}
+        .inputs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-.inputs{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
+        input {
+            width: 100px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #1e293b;
+            color: white;
+            text-align: center;
+        }
 
-input{
-    width:100px;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    background:#1e293b;
-    color:white;
-    text-align:center;
-}
+        input[type="radio"] {
+            width: auto;
+            padding: 0;
+        }
 
-button{
-    width:100%;
-    padding:18px;
-    margin-top:20px;
-    border:none;
-    border-radius:16px;
-    background:linear-gradient(90deg,#2563eb,#38bdf8);
-    color:white;
-    font-size:17px;
-    cursor:pointer;
-    font-weight:bold;
-}
+        button {
+            width: 100%;
+            padding: 18px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(90deg, #2563eb, #38bdf8);
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.subject-result{
-    margin-top:10px;
-    background:#0f172a;
-    padding:12px;
-    border-radius:12px;
-}
+        .subject-result {
+            margin-top: 10px;
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 12px;
+        }
 
-.footer{
-    text-align:center;
-    margin-top:30px;
-    color:#94a3b8;
-    font-size:13px;
-}
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
 
-.footer a{
-    color:#38bdf8;
-    text-decoration:none;
-    font-size:16px;
-    font-weight:bold;
-}
-
-</style>
+        .footer a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
 
 </head>
+
 <body>
 
-<header>
-    <h1>💻 Semester 4 Calculator</h1>
-    <div class="logo">AIBYTE</div>
-</header>
+    <header>
+        <h1>💻 Semester Calculator</h1>
+        <div class="logo">AIBYTE</div>
+    </header>
 
-<div class="container">
+    <div class="container">
 
-    <div class="matiere">
-        <h3>📚 Semester 1 Average</h3>
-        <div class="inputs">
-            <input id="semester1" placeholder="S1 /20">
+        <div class="matiere">
+            <h3>📚 Semester 1 Mode</h3>
+
+            <div class="inputs">
+                <label>
+                    <input type="radio" name="s1mode" value="average" checked onchange="toggleModes()">
+                    Average
+                </label>
+
+                <label>
+                    <input type="radio" name="s1mode" value="details" onchange="toggleModes()">
+                    Detailed Subjects
+                </label>
+            </div>
         </div>
-    </div>
 
-    <div class="matiere">
-        <h3>🌐 Réseaux informatiques (Coef 3)</h3>
-        <div class="inputs">
-            <input id="net_exam" placeholder="Exam">
-            <input id="net_td" placeholder="TD">
-            <input id="net_tp" placeholder="TP">
+        <div id="s1AverageBlock" class="matiere">
+            <h3>📚 Semester 1 Average</h3>
+
+            <div class="inputs">
+                <input id="semester1" placeholder="S1 /20">
+            </div>
         </div>
-    </div>
 
-    <div class="matiere">
-        <h3>🖥️ Systèmes d'exploitation (Coef 4)</h3>
-        <div class="inputs">
-            <input id="sys_exam" placeholder="Exam">
-            <input id="sys_td" placeholder="TD">
+        <div id="s1DetailsBlock" style="display:none;">
+
+            <div class="matiere">
+                <h3>📘 Algorithmique 3 (Coef 4)</h3>
+
+                <div class="inputs">
+                    <input id="algo_exam" placeholder="Exam">
+                    <input id="algo_td" placeholder="TD">
+                    <input id="algo_tp" placeholder="TP">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>☕ POO 1 (Coef 4)</h3>
+
+                <div class="inputs">
+                    <input id="poo1_exam" placeholder="Exam">
+                    <input id="poo1_tp" placeholder="TP">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>📐 Algèbre 3 (Coef 3)</h3>
+
+                <div class="inputs">
+                    <input id="alg_exam" placeholder="Exam">
+                    <input id="alg_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>📊 Analyse (Coef 3)</h3>
+
+                <div class="inputs">
+                    <input id="ana_exam" placeholder="Exam">
+                    <input id="ana_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>🗂️ Système d'information (Coef 3)</h3>
+
+                <div class="inputs">
+                    <input id="si_exam" placeholder="Exam">
+                    <input id="si_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>🎲 Probabilité (Coef 2)</h3>
+
+                <div class="inputs">
+                    <input id="prob_exam" placeholder="Exam">
+                    <input id="prob_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>💼 Entrepreneuriat (Coef 1)</h3>
+
+                <div class="inputs">
+                    <input id="ent_exam" placeholder="Exam">
+                </div>
+            </div>
+
         </div>
-    </div>
 
-    <div class="matiere">
-        <h3>☕ Programmation orientée objet (Coef 4)</h3>
-        <div class="inputs">
-            <input id="poo_exam" placeholder="Exam">
-            <input id="poo_tp" placeholder="TP">
+        <div class="matiere">
+            <h3>📚 Semester 2 Mode</h3>
+
+            <div class="inputs">
+                <label>
+                    <input type="radio" name="s2mode" value="details" checked onchange="toggleModes()">
+                    Detailed Subjects
+                </label>
+
+                <label>
+                    <input type="radio" name="s2mode" value="average" onchange="toggleModes()">
+                    Average
+                </label>
+            </div>
         </div>
-    </div>
 
-    <div class="matiere">
-        <h3>🔤 Théorie des langages (Coef 3)</h3>
-        <div class="inputs">
-            <input id="lang_exam" placeholder="Exam">
-            <input id="lang_td" placeholder="TD">
+        <div id="s2AverageBlock" class="matiere" style="display:none;">
+            <h3>📚 Semester 2 Average</h3>
+
+            <div class="inputs">
+                <input id="semester2manual" placeholder="S2 /20">
+            </div>
         </div>
-    </div>
 
-    <div class="matiere">
-        <h3>🗄️ Bases de données (Coef 3)</h3>
-        <div class="inputs">
-            <input id="db_exam" placeholder="Exam">
-            <input id="db_td" placeholder="TD">
+        <div id="s2DetailsBlock">
+
+            <div class="matiere">
+                <h3>🌐 Réseaux informatiques (Coef 3)</h3>
+
+                <div class="inputs">
+                    <input id="net_exam" placeholder="Exam">
+                    <input id="net_td" placeholder="TD">
+                    <input id="net_tp" placeholder="TP">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>🖥️ Systèmes d'exploitation (Coef 4)</h3>
+
+                <div class="inputs">
+                    <input id="sys_exam" placeholder="Exam">
+                    <input id="sys_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>☕ Programmation orientée objet (Coef 4)</h3>
+
+                <div class="inputs">
+                    <input id="poo_exam" placeholder="Exam">
+                    <input id="poo_tp" placeholder="TP">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>🔤 Théorie des langages (Coef 3)</h3>
+
+                <div class="inputs">
+                    <input id="lang_exam" placeholder="Exam">
+                    <input id="lang_td" placeholder="TD">
+                </div>
+            </div>
+            <div class="matiere">
+                <h3>🗄️ Bases de données (Coef 3)</h3>
+
+                <div class="inputs">
+                    <input id="db_exam" placeholder="Exam">
+                    <input id="db_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>📊 Théorie des graphes (Coef 2)</h3>
+
+                <div class="inputs">
+                    <input id="graph_exam" placeholder="Exam">
+                    <input id="graph_td" placeholder="TD">
+                </div>
+            </div>
+
+            <div class="matiere">
+                <h3>⚖️ Déontologie de l'informatique (Coef 1)</h3>
+
+                <div class="inputs">
+                    <input id="deo_exam" placeholder="Exam">
+                </div>
+            </div>
+
         </div>
-    </div>
 
-    <div class="matiere">
-        <h3>📊 Théorie des graphes (Coef 2)</h3>
-        <div class="inputs">
-            <input id="graph_exam" placeholder="Exam">
-            <input id="graph_td" placeholder="TD">
+        <button onclick="calculer()">
+            🔥 Calculate Results
+        </button>
+
+        <div id="details"></div>
+
+        <div class="footer">
+            Created by Ali (AIBYTE) 🚀
+            <br><br>
+
+            <a href="https://www.instagram.com/aiby.te/" target="_blank">
+                <i class="fab fa-instagram"></i> @aiby.te
+            </a>
         </div>
+
     </div>
 
-    <div class="matiere">
-        <h3>⚖️ Déontologie de l'informatique (Coef 1)</h3>
-        <div class="inputs">
-            <input id="deo_exam" placeholder="Exam">
-        </div>
-    </div>
+    <script>
 
-    <button onclick="calculer()">
-        🔥 Calculate Results
-    </button>
+        function toggleModes() {
 
-    <div id="details"></div>
+            let s1 =
+                document.querySelector('input[name="s1mode"]:checked').value;
 
-    <div class="footer">
-        Created by Ali (AIBYTE) 🚀
-        <br><br>
+            document.getElementById("s1AverageBlock").style.display =
+                s1 === "average" ? "block" : "none";
 
-        <a href="https://www.instagram.com/aiby.te/" target="_blank">
-            <i class="fab fa-instagram"></i> @aiby.te
-        </a>
-    </div>
+            document.getElementById("s1DetailsBlock").style.display =
+                s1 === "details" ? "block" : "none";
 
-</div>
+            let s2 =
+                document.querySelector('input[name="s2mode"]:checked').value;
 
-<script>
+            document.getElementById("s2AverageBlock").style.display =
+                s2 === "average" ? "block" : "none";
 
-function v(id){
-    let n = parseFloat(document.getElementById(id).value);
-    return isNaN(n) ? 0 : n;
-}
+            document.getElementById("s2DetailsBlock").style.display =
+                s2 === "details" ? "block" : "none";
+        }
 
-function examTD(exam, td){
-    return exam*0.6 + td*0.4;
-}
+        function v(id) {
+            let n = parseFloat(document.getElementById(id).value);
+            return isNaN(n) ? 0 : n;
+        }
 
-function examTP(exam, tp){
-    return exam*0.6 + tp*0.4;
-}
+        function examTD(exam, td) {
+            return exam * 0.6 + td * 0.4;
+        }
 
-function examTDTP(exam, td, tp){
-    return exam*0.6 + ((td+tp)/2)*0.4;
-}
+        function examTP(exam, tp) {
+            return exam * 0.6 + tp * 0.4;
+        }
 
-function line(name, note){
+        function examTDTP(exam, td, tp) {
+            return exam * 0.6 + td * 0.2 + tp * 0.2;
+        }
 
-    if(note >= 10){
-        return `
-        <div class="subject-result">
-            ✅ <b>${name}</b>: ${note.toFixed(2)}/20
-        </div>`;
-    }
+        function line(name, note) {
 
-    return `
+            return `
     <div class="subject-result">
-        ❌ <b>${name}</b>: ${note.toFixed(2)}/20
+        ${note >= 10 ? "✅" : "❌"}
+        <b>${name}</b> : ${note.toFixed(2)}/20
     </div>`;
-}
+        }
 
-function calculer(){
+        function calculer() {
 
-    let total = 0;
-    let html = "";
+            let html = "";
 
-    let net = examTDTP(
-        v("net_exam"),
-        v("net_td"),
-        v("net_tp")
-    );
-    total += net * 3;
+            let semester1;
 
-    let sys = examTD(
-        v("sys_exam"),
-        v("sys_td")
-    );
-    total += sys * 4;
+            if (
+                document.querySelector('input[name="s1mode"]:checked').value
+                === "average"
+            ) {
 
-    let poo = examTP(
-        v("poo_exam"),
-        v("poo_tp")
-    );
-    total += poo * 4;
+                semester1 = v("semester1");
 
-    let lang = examTD(
-        v("lang_exam"),
-        v("lang_td")
-    );
-    total += lang * 3;
+            } else {
 
-    let db = examTD(
-        v("db_exam"),
-        v("db_td")
-    );
-    total += db * 3;
+                let algo = examTDTP(
+                    v("algo_exam"),
+                    v("algo_td"),
+                    v("algo_tp")
+                );
 
-    let graph = examTD(
-        v("graph_exam"),
-        v("graph_td")
-    );
-    total += graph * 2;
+                let poo1 = examTP(
+                    v("poo1_exam"),
+                    v("poo1_tp")
+                );
 
-    let deo = v("deo_exam");
-    total += deo;
+                let alg = examTD(
+                    v("alg_exam"),
+                    v("alg_td")
+                );
 
-    let semester2 = total / 20;
+                let ana = examTD(
+                    v("ana_exam"),
+                    v("ana_td")
+                );
 
-    let semester1 = v("semester1");
+                let si = examTD(
+                    v("si_exam"),
+                    v("si_td")
+                );
 
-    let annualAverage = ((semester1 * 20) + (semester2 * 20)) / 40;
+                let prob = examTD(
+                    v("prob_exam"),
+                    v("prob_td")
+                );
 
-    html += `
+                let ent = v("ent_exam");
+
+                let totalS1 =
+                    algo * 4 +
+                    poo1 * 4 +
+                    alg * 3 +
+                    ana * 3 +
+                    si * 3 +
+                    prob * 2 +
+                    ent;
+
+                semester1 = totalS1 / 20;
+                html += "<hr>";
+                html += line("Algorithmique 3", algo);
+                html += line("POO 1", poo1);
+                html += line("Algèbre 3", alg);
+                html += line("Analyse", ana);
+                html += line("Système d'information", si);
+                html += line("Probabilité", prob);
+                html += line("Entrepreneuriat", ent);
+            }
+
+            let semester2;
+
+            if (
+                document.querySelector('input[name="s2mode"]:checked').value
+                === "average"
+            ) {
+
+                semester2 = v("semester2manual");
+
+            } else {
+
+                let total = 0;
+
+                let net = examTDTP(
+                    v("net_exam"),
+                    v("net_td"),
+                    v("net_tp")
+                );
+                total += net * 3;
+
+                let sys = examTD(
+                    v("sys_exam"),
+                    v("sys_td")
+                );
+                total += sys * 4;
+
+                let poo = examTP(
+                    v("poo_exam"),
+                    v("poo_tp")
+                );
+                total += poo * 4;
+
+                let lang = examTD(
+                    v("lang_exam"),
+                    v("lang_td")
+                );
+                total += lang * 3;
+
+                let db = examTD(
+                    v("db_exam"),
+                    v("db_td")
+                );
+                total += db * 3;
+
+                let graph = examTD(
+                    v("graph_exam"),
+                    v("graph_td")
+                );
+                total += graph * 2;
+
+                let deo = v("deo_exam");
+                total += deo;
+
+                semester2 = total / 20;
+
+                html += "<hr>";
+                html += line("Réseaux informatiques", net);
+                html += line("Systèmes d'exploitation", sys);
+                html += line("Programmation orientée objet", poo);
+                html += line("Théorie des langages", lang);
+                html += line("Bases de données", db);
+                html += line("Théorie des graphes", graph);
+                html += line("Déontologie", deo);
+            }
+
+            let annualAverage =
+                (semester1 + semester2) / 2;
+
+            html =
+                `
     <h2 style="text-align:center;">
-        📊 Semester 2 Average: ${semester2.toFixed(2)}/20
+        📚 Semester 1 Average:
+        ${semester1.toFixed(2)}/20
+    </h2>
+
+    <h2 style="text-align:center;">
+        📚 Semester 2 Average:
+        ${semester2.toFixed(2)}/20
     </h2>
 
     <h2 style="text-align:center;color:#38bdf8;">
-        🏆 Annual Average: ${annualAverage.toFixed(2)}/20
-    </h2>`;
+        🏆 Annual Average:
+        ${annualAverage.toFixed(2)}/20
+    </h2>
+    `
+                + html;
 
-    html += annualAverage >= 10
-        ? `<p style="text-align:center;color:#4ade80;">🎉 Year Validated!</p>`
-        : `<p style="text-align:center;color:#f87171;">⚠️ Year Not Validated</p>`;
+            html += annualAverage >= 10
+                ? `<p style="text-align:center;color:#4ade80;">🎉 Year Validated!</p>`
+                : `<p style="text-align:center;color:#f87171;">⚠️ Year Not Validated</p>`;
 
-    html += "<hr>";
+            document.getElementById("details").innerHTML = html;
+        }
 
-    html += line("Réseaux informatiques", net);
-    html += line("Systèmes d'exploitation", sys);
-    html += line("Programmation orientée objet", poo);
-    html += line("Théorie des langages", lang);
-    html += line("Bases de données", db);
-    html += line("Théorie des graphes", graph);
-    html += line("Déontologie de l'informatique", deo);
+        toggleModes();
 
-    document.getElementById("details").innerHTML = html;
-}
-
-</script>
+    </script>
 
 </body>
+
 </html>
